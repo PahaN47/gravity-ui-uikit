@@ -31,14 +31,7 @@ const preview: Preview = {
         },
         options: {
             storySort: {
-                order: [
-                    'Components',
-                    ['Inputs', 'Data Display', 'Feedback', 'Navigation', 'Overlays', 'Utils'],
-                    'Layout',
-                    'Hooks',
-                    'Branding',
-                    ['Overview'],
-                ],
+                order: ['Components', ['Overlays', ['Popup']]],
                 method: 'alphabetical',
             },
         },

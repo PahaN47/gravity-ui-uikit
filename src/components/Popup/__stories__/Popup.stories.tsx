@@ -18,6 +18,10 @@ export default meta;
 
 type Story = StoryObj<typeof Popup>;
 
+export const A11yExample: Story = {
+    render: () => <PopupA11yStory />,
+};
+
 export const Default: Story = {
     render: function PopupStory(props) {
         const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -157,7 +161,7 @@ export const Position: Story = {
     },
 };
 
-const PopupA11yStory = () => {
+function PopupA11yStory() {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isPopupOpen, setIsPopupOpen] = React.useState(false);
@@ -232,8 +236,4 @@ const PopupA11yStory = () => {
             <span>This is text after example popup.</span>
         </div>
     );
-};
-
-export const A11yExample: Story = {
-    render: () => <PopupA11yStory />,
-};
+}
