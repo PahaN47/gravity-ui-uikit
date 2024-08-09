@@ -5,6 +5,7 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {useVirtualElementRef} from '../../../hooks';
 import {Button} from '../../Button';
 import {Text} from '../../Text';
+import {FocusTrap} from '../../utils/FocusTrap';
 import {Popup} from '../Popup';
 import type {PopupPlacement} from '../Popup';
 
@@ -154,4 +155,85 @@ export const Position: Story = {
     parameters: {
         layout: 'centered',
     },
+};
+
+const PopupA11yStory = () => {
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+    const [isPopupOpen, setIsPopupOpen] = React.useState(false);
+    const [isExamplePopupOpen, setIsExamplePopupOpen] = React.useState(false);
+
+    const renderButtons = () =>
+        new Array(5).fill(0).map((_, index) => <Button key={index}>Button {index}</Button>);
+
+    return (
+        <div>
+            <h1 style={{lineHeight: '1.5em'}}>
+                This is the current popup. The screen reader focus can freely leave it
+            </h1>
+            <Button size="xl" onClick={() => setIsPopupOpen((prev) => !prev)} ref={buttonRef}>
+                {isPopupOpen ? 'Hide' : 'Show'} popup
+            </Button>
+            <div ref={containerRef} />
+            <Popup
+                open={isPopupOpen}
+                anchorRef={buttonRef}
+                onClose={() => setIsPopupOpen(false)}
+                autoFocus
+                focusTrap
+                container={containerRef.current}
+            >
+                <div style={{padding: 16, display: 'flex', flexDirection: 'column', gap: 12}}>
+                    This does not trap screen reader focus
+                    {renderButtons()}
+                </div>
+            </Popup>
+            <h1 style={{lineHeight: '1.5em'}}>
+                And this is what happens when you use role=&quot;dialog&quot;
+                aria-modal=&quot;true&quot;. Screen reader focus can now be trapped (depends on
+                screen reader&apos;s browser support)
+            </h1>
+            <div style={{position: 'relative'}}>
+                <Button size="xl" onClick={() => setIsExamplePopupOpen((prev) => !prev)}>
+                    {isExamplePopupOpen ? 'Hide' : 'Show'} example popup
+                </Button>
+                {isExamplePopupOpen && (
+                    <FocusTrap enabled autoFocus>
+                        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: 40,
+                                left: 0,
+                                backgroundColor: '#ffffff',
+                                padding: 16,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 12,
+                                width: 200,
+                                border: '1px solid black',
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key.toLowerCase() === 'escape') {
+                                    e.preventDefault();
+                                    setIsExamplePopupOpen(false);
+                                }
+                            }}
+                            // these 2 props are the ones that to the trapping
+                            role="dialog"
+                            aria-modal
+                        >
+                            This traps screen reader focus
+                            {renderButtons()}
+                        </div>
+                    </FocusTrap>
+                )}
+            </div>
+            <span>This is text after example popup.</span>
+        </div>
+    );
+};
+
+export const A11yExample: Story = {
+    render: () => <PopupA11yStory />,
 };
