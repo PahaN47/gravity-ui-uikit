@@ -1,0 +1,114 @@
+{
+    // These tasks will run in order when initializing your CodeSandbox project.
+    "setupTasks": [
+      {
+        "name": "Install Dependencies",
+        "command": "npm install"
+      }
+    ],
+  
+    // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+    "tasks": {
+      "prepare": {
+        "name": "prepare",
+        "command": "npm run prepare"
+      },
+      "test": {
+        "name": "test",
+        "command": "npm run test"
+      },
+      "test-storybook": {
+        "name": "test-storybook",
+        "command": "npm run test-storybook"
+      },
+      "test:coverage": {
+        "name": "test:coverage",
+        "command": "npm run test:coverage"
+      },
+      "test:watch": {
+        "name": "test:watch",
+        "command": "npm run test:watch"
+      },
+      "clean": {
+        "name": "clean",
+        "command": "npm run clean"
+      },
+      "build": {
+        "name": "build",
+        "command": "npm run build"
+      },
+      "start": {
+        "name": "start",
+        "command": "npm run start",
+        "runAtStart": true,
+        "preview": {
+          "port": 7007
+        }
+      },
+      "build-storybook": {
+        "name": "build-storybook",
+        "command": "npm run build-storybook"
+      },
+      "lint:js": {
+        "name": "lint:js",
+        "command": "npm run lint:js"
+      },
+      "lint:js:fix": {
+        "name": "lint:js:fix",
+        "command": "npm run lint:js:fix"
+      },
+      "lint:styles": {
+        "name": "lint:styles",
+        "command": "npm run lint:styles"
+      },
+      "lint:styles:fix": {
+        "name": "lint:styles:fix",
+        "command": "npm run lint:styles:fix"
+      },
+      "lint:prettier": {
+        "name": "lint:prettier",
+        "command": "npm run lint:prettier"
+      },
+      "lint:prettier:fix": {
+        "name": "lint:prettier:fix",
+        "command": "npm run lint:prettier:fix"
+      },
+      "lint": {
+        "name": "lint",
+        "command": "npm run lint"
+      },
+      "typecheck": {
+        "name": "typecheck",
+        "command": "npm run typecheck"
+      },
+      "prepublishOnly": {
+        "name": "prepublishOnly",
+        "command": "npm run prepublishOnly"
+      },
+      "playwright:install": {
+        "name": "playwright:install",
+        "command": "npm run playwright:install"
+      },
+      "playwright": {
+        "name": "playwright",
+        "command": "npm run playwright"
+      },
+      "playwright:update": {
+        "name": "playwright:update",
+        "command": "npm run playwright:update"
+      },
+      "playwright:docker": {
+        "name": "playwright:docker",
+        "command": "npm run playwright:docker"
+      },
+      "playwright:docker:update": {
+        "name": "playwright:docker:update",
+        "command": "npm run playwright:docker:update"
+      },
+      "playwright:docker:clear-cache": {
+        "name": "playwright:docker:clear-cache",
+        "command": "npm run playwright:docker:clear-cache"
+      }
+    }
+  }
+  
